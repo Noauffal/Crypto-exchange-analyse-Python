@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 1800px;
+            height: 1000px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"group": 2, "id": "1526434", "label": "1526434", "shape": "dot", "size": 10, "title": "38279468.044"}, {"group": 1, "id": "Bitstamp.net", "label": "Bitstamp.net", "shape": "dot", "size": 10, "title": "17097428.774"}, {"group": 2, "id": "73884071", "label": "73884071", "shape": "dot", "size": 10, "title": "2.7280000000000015"}, {"group": 2, "id": "1648", "label": "1648", "shape": "dot", "size": 10, "title": "2456859.475999997"}, {"group": 3, "id": "422894", "label": "422894", "shape": "dot", "size": 10, "title": "2215268.5080000004"}, {"group": 3, "id": "375565", "label": "375565", "shape": "dot", "size": 10, "title": "80364.444"}, {"group": 11, "id": "Bitstamp.net-old", "label": "Bitstamp.net-old", "shape": "dot", "size": 10, "title": "586995.3659999999 Exchanges"}, {"group": 3, "id": "Xapo.com", "label": "Xapo.com", "shape": "dot", "size": 10, "title": "1861471.0969999998"}, {"group": 3, "id": "6381346", "label": "6381346", "shape": "dot", "size": 10, "title": "885.792"}, {"group": 3, "id": "78257", "label": "78257", "shape": "dot", "size": 10, "title": "15413164.705999998"}, {"group": 6, "id": "65246302", "label": "65246302", "shape": "dot", "size": 10, "title": "44904.514 None"}, {"group": 6, "id": "47404621", "label": "47404621", "shape": "dot", "size": 10, "title": "22275.756 None"}, {"group": 6, "id": "36477723", "label": "36477723", "shape": "dot", "size": 10, "title": "13184.174 None"}, {"group": 7, "id": "17103859", "label": "17103859", "shape": "dot", "size": 10, "title": "71305.993 None"}, {"group": 7, "id": "32704217", "label": "32704217", "shape": "dot", "size": 10, "title": "25549.663 None"}, {"group": 8, "id": "27872599", "label": "27872599", "shape": "dot", "size": 10, "title": "885.792 None"}, {"group": 9, "id": "Bitfinex.com-old2", "label": "Bitfinex.com-old2", "shape": "dot", "size": 10, "title": "11312199.742 Exchanges"}, {"group": 9, "id": "139318", "label": "139318", "shape": "dot", "size": 10, "title": "4064620.2189999996 None"}, {"group": 9, "id": "45974211", "label": "45974211", "shape": "dot", "size": 10, "title": "36344.745 None"}, {"group": 11, "id": "ePay.info", "label": "ePay.info", "shape": "dot", "size": 10, "title": "867829.663 Services"}, {"group": 10, "id": "4751432", "label": "4751432", "shape": "dot", "size": 10, "title": "263.662 None"}, {"group": 10, "id": "61186415", "label": "61186415", "shape": "dot", "size": 10, "title": "143.777 None"}, {"group": 11, "id": "2244498", "label": "2244498", "shape": "dot", "size": 10, "title": "406646.06799999997 None"}]);
+        edges = new vis.DataSet([{"arrows": "to", "from": "1526434", "to": "Bitstamp.net", "weight": 1}, {"arrows": "to", "from": "73884071", "to": "Bitstamp.net", "weight": 1}, {"arrows": "to", "from": "1648", "to": "Bitstamp.net", "weight": 1}, {"arrows": "to", "from": "422894", "to": "1526434", "weight": 1}, {"arrows": "to", "from": "375565", "to": "1526434", "weight": 1}, {"arrows": "to", "from": "Bitstamp.net-old", "to": "1526434", "weight": 1}, {"arrows": "to", "from": "Bitstamp.net-old", "to": "422894", "weight": 1}, {"arrows": "to", "from": "Bitstamp.net-old", "to": "Xapo.com", "weight": 1}, {"arrows": "to", "from": "Xapo.com", "to": "1648", "weight": 1}, {"arrows": "to", "from": "6381346", "to": "1648", "weight": 1}, {"arrows": "to", "from": "78257", "to": "73884071", "weight": 1}, {"arrows": "to", "from": "65246302", "to": "375565", "weight": 1}, {"arrows": "to", "from": "47404621", "to": "375565", "weight": 1}, {"arrows": "to", "from": "36477723", "to": "375565", "weight": 1}, {"arrows": "to", "from": "17103859", "to": "422894", "weight": 1}, {"arrows": "to", "from": "32704217", "to": "422894", "weight": 1}, {"arrows": "to", "from": "27872599", "to": "6381346", "weight": 1}, {"arrows": "to", "from": "Bitfinex.com-old2", "to": "78257", "weight": 1}, {"arrows": "to", "from": "139318", "to": "78257", "weight": 1}, {"arrows": "to", "from": "45974211", "to": "78257", "weight": 1}, {"arrows": "to", "from": "ePay.info", "to": "Bitstamp.net-old", "weight": 1}, {"arrows": "to", "from": "ePay.info", "to": "Xapo.com", "weight": 1}, {"arrows": "to", "from": "4751432", "to": "Bitstamp.net-old", "weight": 1}, {"arrows": "to", "from": "61186415", "to": "Bitstamp.net-old", "weight": 1}, {"arrows": "to", "from": "2244498", "to": "Xapo.com", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
